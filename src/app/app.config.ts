@@ -9,9 +9,11 @@ export const appConfig: ApplicationConfig = {
     { provide: ApiConfigurations, useValue: { rootUrl: environment.apiUrl } },
     provideRouter([
       {
-        path: '', loadComponent: () => import('./home/home.component')
-      }
+        path: '',
+        loadComponent: () => import('./ui/layout.component'),
+        loadChildren: () => import('./ui/layout.routes'),
+      },
     ]),
-    provideHttpClient()
-  ]
+    provideHttpClient(),
+  ],
 };
