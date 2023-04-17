@@ -1,6 +1,8 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 import { ApiConfigurations } from 'src/app/config/api-config';
 import { Article } from 'src/app/models/article';
 
@@ -15,6 +17,11 @@ export default class ArticlesComponent implements OnInit {
     apiClient = inject(ApiConfigurations);
     articles: Article[] = [];
 
+    count = signal<number>(1);
+    obs$: Observable<number> = toObservable(this.count);
+
+    doubleCount = computed(() => this.count() + 1)
+
     globalArticles() {
         this.http.get(`${this.apiClient.rootUrl}/articles`).subscribe((res: any) => {
             this.articles = res.articles as Article[];
@@ -23,5 +30,8 @@ export default class ArticlesComponent implements OnInit {
 
     ngOnInit(): void {
         this.globalArticles();
+        // effect(() => {
+        //     this.count.set(5)
+        // })
     }
 }
