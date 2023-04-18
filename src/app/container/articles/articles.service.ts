@@ -1,17 +1,24 @@
-// import { Injectable, inject } from '@angular/core';
-// import { switchMap } from 'rxjs';
-// import { ApiConfigurations } from 'src/app/config/api-config';
-// import { RequestBuilder } from 'src/app/request-builder';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ArticlesService {
+@Injectable()
+export class ArticlesService {
 
-//   constructor() { }
-//   apiConfig = inject(ApiConfigurations)
+    destroy$ = new Subject<void>()
+    constructor(private http: HttpClient) { }
 
-//   getArticles() {
-//     this.
-//   }
-// }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+
+    }
+
+    get(url: string) {        
+        this.destroy$.next();
+        return this.http.get(url).pipe(
+            takeUntil(this.destroy$)
+        );
+    }
+
+}
