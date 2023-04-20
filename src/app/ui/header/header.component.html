@@ -1,10 +1,31 @@
 <header class="bg-white shadow">
-    <nav class="container mx-auto px-4 py-2 flex justify-between items-center">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
         <a routerLink="/" class="text-2xl font-semibold text-green-500">conduit</a>
         <ul class="flex space-x-6">
-            <li><a routerLink="/" class="text-gray-600 hover:text-gray-800">Home</a></li>
-            <li><a routerLink="/login" class="text-gray-600 hover:text-gray-800">Sign in</a></li>
-            <li><a routerLink="/signup" class="text-gray-600 hover:text-gray-800">Sign up</a></li>
+            <li>
+                <a class="text-gray-600 hover:text-gray-800" routerLink="/" routerLinkActive="text-black-500 font-bold"
+                    [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            </li>
+            <ng-container *ngIf="authService.isAuthenticated(); else nonAuthUser">
+                <li><a class="text-gray-600 hover:text-gray-800" routerLink="/new-article"
+                        routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{exact: true}">New
+                        Article</a></li>
+                <li><a class="text-gray-600 hover:text-gray-800" routerLink="/settings"
+                        routerLinkActive="text-black-500 font-bold"
+                        [routerLinkActiveOptions]="{exact: true}">Settings</a></li>
+                <li><a class="text-blue-500" routerLink="/user" routerLinkActive="text-black-500 font-bold"
+                        [routerLinkActiveOptions]="{exact: true}">{{authService.username()}}</a></li>
+            </ng-container>
+            <ng-template #nonAuthUser>
+                <li><a routerLink="/login" class="text-gray-600 hover:text-gray-800"
+                        routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{ exact: true }">Sign
+                        in</a>
+                </li>
+                <li><a routerLink="/signup" class="text-gray-600 hover:text-gray-800"
+                        routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{ exact: true }">Sign
+                        up</a>
+                </li>
+            </ng-template>
         </ul>
     </nav>
 </header>

@@ -1,0 +1,35 @@
+<section class="grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="md:col-span-3">
+    <div class="mb-6">
+      <!-- <div class="flex justify-between items-center">
+        <ul class="flex">
+          <li class="nav-item">
+            <a id="your-feed-tab" class="nav-link text-lg font-semibold py-2 px-4 border-b-4" (click)="changeFeed('own')">Your Feed</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="global-articles-tab"
+              class="nav-link text-lg font-semibold py-2 px-4 border-b-4  border-blue-500 hover:border-blue-600"
+              (click)="changeFeed('global')">Global Feed</a>
+          </li>
+        </ul>
+      </div> -->
+
+
+
+      <div id="your-feed" class="flex flex-wrap justify-between items-center w-full">
+        <!-- Your Feed article cards go here -->
+        <ng-container *ngComponentOutlet="selectedItem.component; inputs: selectedItem.inputs" />
+      </div>
+      <!-- <div id="global-articles" class="article-list hidden">
+       
+      </div> -->
+    </div>
+  </div>
+  <aside class="md:col-span-1 mt-10">
+    <h3 class="text-xl font-semibold mb-4">Popular Tags</h3>
+    <div class="flex flex-wrap">
+      <!-- Add popular tags as .tag elements -->
+      <span class="tag bg-gray-200 text-gray-800 px-3 py-1 m-1 rounded">example</span>
+    </div>
+  </aside>
+</section>

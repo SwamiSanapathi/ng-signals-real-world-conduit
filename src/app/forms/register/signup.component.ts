@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NewUser } from 'src/app/models/new-user';
 import { SignupService } from './signup.service';
 import { processAuthErrors } from 'src/app/utils/process-auth-errors';
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
     standalone: true,
@@ -15,16 +16,24 @@ import { ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class SignupComponent {
-    signupService = inject(SignupService)
-    user: NewUser = { email: '', password: '', username: '' };
-    errors: Record<string, string[]> = {};
+    readonly #signupService = inject(SignupService)
+    readonly #authService = inject(AuthService)
+    readonly #router = inject(Router)
+    readonly user: NewUser = { email: '', password: '', username: '' };
+    readonly errors = signal<Record<string, string[]>>({})
 
 
     signup() {
-        this.signupService.addUser(this.user).subscribe((res: any) => {
+        this.#signupService.addUser(this.user).subscribe((res: any) => {
             console.log(res);
+            sessionStorage.setItem('token', res.user.token);
+            this.#authService.initialAuth.set(true)
+            this.#authService.user.set(res.user.username)
+            this.#router.navigate(['/']);
+            this
         }, (error: httpErrorResponse) => {
-            this.errors = processAuthErrors(error.error.errors);
+            this.errors.set(processAuthErrors(error.error.errors));
+            console.log('this.errors -->', this.errors());
         });
     }
 }

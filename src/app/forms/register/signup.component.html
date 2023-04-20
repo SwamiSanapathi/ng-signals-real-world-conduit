@@ -1,10 +1,10 @@
 <div class="w-full max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-8">Sign Up</h2>
     <form class="bg-white shadow rounded p-6 space-y-4" (ngSubmit)="signup()">
-        <ng-container *ngIf="errors['errors']">
+        <ng-container *ngIf="errors()['errors'] as err">
             <ul class="bg-red-100 border border-red-400 text-red-700 px-6 py-3 rounded list-disc mt-4 ml-2">
-                <li class="font-bold mb-2">Error!</li>
-                <li *ngFor="let item of errors['errors']" class="ml-4">{{item}}</li>
+                <!-- <li class="font-bold mb-2">Error!</li> -->
+                <li *ngFor="let item of err" class="ml-4">{{item}}</li>
             </ul>
         </ng-container>
         <div>
@@ -26,6 +26,6 @@
             Up</button>
     </form>
     <p class="text-center mt-4">
-        Have an account? <a href="signin.html" class="text-green-500 hover:text-green-600">Sign In</a>
+        Have an account? <a routerLink="/login" class="text-green-500 hover:text-green-600">Sign In</a>
     </p>
 </div>
