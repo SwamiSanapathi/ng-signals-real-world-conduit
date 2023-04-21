@@ -1,7 +1,13 @@
 <ng-container class="container mx-auto px-4 py-8">
   <div class="w-full max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-8">Sign In</h2>
-    <form class="bg-white shadow rounded p-6 space-y-4">
+    <form class="bg-white shadow rounded p-6 space-y-4" (ngSubmit)="login()">
+      <ng-container *ngIf="authService.errors()['errors'] as err">
+        <ul class="bg-red-100 border border-red-400 text-red-700 px-6 py-3 rounded list-disc mt-4 ml-2">
+            <!-- <li class="font-bold mb-2">Error!</li> -->
+            <li *ngFor="let item of err" class="ml-4">{{item}}</li>
+        </ul>
+    </ng-container>
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
         <input type="email" id="email" name="email" [(ngModel)]="user.email"
@@ -16,7 +22,7 @@
         In</button>
     </form>
     <p class="text-center mt-4">
-      Don't have an account? <a href="signup.html" class="text-green-500 hover:text-green-600">Sign Up</a>
+      Don't have an account? <a routerLink="/signup" class="text-green-500 hover:text-green-600">Sign Up</a>
     </p>
   </div>
 </ng-container>

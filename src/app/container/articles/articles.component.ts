@@ -1,6 +1,5 @@
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnInit, inject, signal } from '@angular/core';
-import { ApiConfigurations } from 'src/app/config/api-config';
+import { Component, Input } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { ArticlesService } from './articles.service';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -13,30 +12,10 @@ import { ChangeDetectionStrategy } from '@angular/core';
     providers: [ArticlesService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ArticlesComponent implements OnInit {
-    articleService = inject(ArticlesService);
-    apiClient = inject(ApiConfigurations);
-    articles = signal<Article[]>([]);
-    isLoading = signal(true)
-    cdRef = inject(ChangeDetectorRef)
-    @Input() feedType!: 'global' | 'own';
-
-    ngOnInit(): void {
-        this.globalArticles();
+export default class ArticlesComponent {
+    articles: Article[] = [];
+    @Input() set article(art: any) {
+        this.articles = art;
     }
 
-    globalArticles() {
-        console.log(this.feedType);
-        
-        const feedType = {
-            global: '',
-            own: '/feed'
-        }
-        this.articleService.get(`${this.apiClient.rootUrl}/articles`).subscribe((res: any) => {
-            console.log('response -->', res);
-            this.articles.set(res.articles);
-            this.isLoading.set(false);
-            this.cdRef.markForCheck();
-        })
-    }
 }

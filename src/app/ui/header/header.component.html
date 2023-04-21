@@ -4,26 +4,42 @@
         <ul class="flex space-x-6">
             <li>
                 <a class="text-gray-600 hover:text-gray-800" routerLink="/" routerLinkActive="text-black-500 font-bold"
-                    [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                    [routerLinkActiveOptions]="{ exact: true }">Home
+                </a>
             </li>
             <ng-container *ngIf="authService.isAuthenticated(); else nonAuthUser">
-                <li><a class="text-gray-600 hover:text-gray-800" routerLink="/new-article"
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800" routerLink="/new-article"
                         routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{exact: true}">New
-                        Article</a></li>
-                <li><a class="text-gray-600 hover:text-gray-800" routerLink="/settings"
+                        Article
+                    </a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800" routerLink="/settings"
                         routerLinkActive="text-black-500 font-bold"
-                        [routerLinkActiveOptions]="{exact: true}">Settings</a></li>
-                <li><a class="text-blue-500" routerLink="/user" routerLinkActive="text-black-500 font-bold"
-                        [routerLinkActiveOptions]="{exact: true}">{{authService.username()}}</a></li>
+                        [routerLinkActiveOptions]="{exact: true}">Settings</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800 flex justify-between" routerLink="/user-profile"
+                        routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{exact: true}">
+                        <img class="w-8 h-8 rounded-full mx-1" src="https://api.realworld.io/images/smiley-cyrus.jpeg" />
+
+                        {{authService.username()}}
+                    </a>
+                </li>
             </ng-container>
             <ng-template #nonAuthUser>
-                <li><a routerLink="/login" class="text-gray-600 hover:text-gray-800"
+                <li>
+                    <a routerLink="/login" class="text-gray-600 hover:text-gray-800"
                         routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{ exact: true }">Sign
-                        in</a>
+                        in
+                    </a>
                 </li>
-                <li><a routerLink="/signup" class="text-gray-600 hover:text-gray-800"
+                <li>
+                    <a routerLink="/signup" class="text-gray-600 hover:text-gray-800"
                         routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{ exact: true }">Sign
-                        up</a>
+                        up
+                    </a>
                 </li>
             </ng-template>
         </ul>

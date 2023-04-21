@@ -1,59 +1,31 @@
-<div class="container mx-auto py-12 px-4">
-    <div class="w-full max-w-2xl mx-auto">
-
-        <!-- User's basic info & action buttons -->
-        <div class="text-center mb-8">
-            <img src="https://api.realworld.io/images/smiley-cyrus.jpeg" class="w-32 h-32 rounded-full mx-auto">
-            <h4 class="mt-4">hahahaxd</h4>
-            <p class="text-gray-600"></p>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Follow hahahaxd</button>
-            <a href="#/settings" class="inline-block bg-blue-500 text-white px-4 py-2 rounded mt-4">
-                <i class="ion-gear-a"></i> Edit Profile Settings
-            </a>
-        </div>
-
-        <!-- Tabs for switching between author articles & favorites -->
-        <div class="mb-4">
-            <ul class="flex border-b">
-                <li class="-mb-px mr-2">
-                    <a href="#/@hahahaxd"
-                        class="bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold">
-                        My Articles
+<main class="container mx-auto px-8 py-8 text-center">
+    <div class="profile-page w-full">
+        <div class="user-info  bg-gray-300 p-8 rounded-md">
+            <div class="container mx-auto flex flex-wrap ">
+                <div class="w-full">
+                    <img src="https://api.realworld.io/images/smiley-cyrus.jpeg" alt="User Avatar"
+                        class="w-32 h-32 rounded-full mx-auto mb-4">
+                    <h4 class="text-lg font-medium mb-2">{{authService.username()}}</h4>
+                    <a routerLink="/settings"
+                        class="bg-gray-400 hover:bg-gray-500 text-gray-800 font-medium py-2 px-4 rounded-full">
+                        <i class="fas fa-cog"></i> Edit Profile Settings
                     </a>
-                </li>
-                <li class="-mb-px mr-2">
-                    <a href="#/@hahahaxd/favorites"
-                        class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold">
-                        Favorited Articles
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Article list -->
-        <div>
-            <!-- Replace the below template with a loop to render the list of articles -->
-            <div class="border-b border-gray-200 mb-4 pb-4">
-                <div class="flex items-center mb-2">
-                    <img src="https://api.realworld.io/images/smiley-cyrus.jpeg" class="w-10 h-10 rounded-full">
-                    <div class="ml-4">
-                        <a href="#/@hahahaxd" class="text-blue-700">hahahaxd</a>
-                        <p class="text-gray-500 text-sm">April 20, 2023</p>
-                    </div>
-                    <button class="ml-auto bg-blue-500 text-white px-3 py-1 rounded">Favorite</button>
                 </div>
-                <a href="#/article/dadada-166025" class="text-lg font-bold text-blue-700 hover:text-blue-900">dadada</a>
-                <p class="mt-2">dadada</p>
             </div>
-            <!-- End of article template -->
         </div>
-
-        <!-- Pagination -->
-        <div class="mt-8">
-            <!-- Use the below template for each page number -->
-            <a href="" class="inline-block py-2 px-3 text-blue-700 border border-blue-500 rounded">1</a>
-            <!-- End of pagination template -->
+        <div class="container mx-auto px-8 py-10 flex flex-wrap">
+            <div class="w-full md:w-9/12 lg:w-8/12">
+                <ul class="flex justify-center text-gray-700 font-medium">
+                    <li class="mr-6">
+                        <a class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent">My Posts</a>
+                    </li>
+                    <li class="mr-6">
+                        <a class="text-gray-600 hover:text-gray-800">Favorited
+                            Posts</a>
+                    </li>
+                </ul>
+                <div class="text-center mt-4"> No articles are here... yet. </div>
+            </div>
         </div>
-
     </div>
-</div>
+</main>

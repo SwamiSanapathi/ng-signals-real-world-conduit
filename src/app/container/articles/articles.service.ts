@@ -14,11 +14,9 @@ export class ArticlesService {
 
     }
 
-    get(url: string) {        
+    get(url: string) {
         this.destroy$.next();
-        return this.http.get(url).pipe(
-            takeUntil(this.destroy$)
-        );
+        return this.http.get(url)
     }
 
 }

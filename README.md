@@ -28,8 +28,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 # TODO
-> Login
-> SignUp
-> Authentication
-> Tags
-> Creating Articles
+- Add Interceptors to fetch User Articles
+- Tags
+- Creating Articles
+- User Profile
+- Settings

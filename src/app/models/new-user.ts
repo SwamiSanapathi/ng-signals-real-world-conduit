@@ -5,6 +5,10 @@ export interface NewUser {
 }
 
 
+export interface LoginCredentials {
+    email: string;
+    password: string;
+}
 // {
 //     "username": "Anah Benešová",
 //     "bio": null,
