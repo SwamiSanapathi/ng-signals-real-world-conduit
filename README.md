@@ -1,4 +1,4 @@
-# Ng16
+# Conduit (Real World) Implemented Using Signals
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0-rc.0.
 
