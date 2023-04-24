@@ -1,7 +1,8 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { authInterceptor } from './utils/auth.interceptors';
 import { ApiConfigurations } from './config/api-config';
 
 export const appConfig: ApplicationConfig = {
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
             ],
             withHashLocation()
         ),
-        provideHttpClient(),
+        provideHttpClient(withInterceptors([authInterceptor()])),
     ],
 };

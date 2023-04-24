@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGaurd, nonAuthGaurd } from '../utils/auth.gaurd';
+import { authGuard, nonAuthGuard } from '../utils/auth.guard';
 
 export default [
   {
@@ -9,27 +9,27 @@ export default [
   {
     path: 'signup',
     loadComponent: () => import('../forms/register/signup.component'),
-    canMatch: [nonAuthGaurd()]
+    canMatch: [nonAuthGuard()]
   },
   {
     path: 'login',
     loadComponent: () => import('../forms/login/login.component'),
-    canMatch: [nonAuthGaurd()]
+    canMatch: [nonAuthGuard()]
   },
   {
     path: 'new-article',
     loadComponent: () => import('../new-article/new-article.component'),
-    canMatch: [authGaurd()]
+    canMatch: [authGuard()]
   },
   {
     path: 'settings',
     loadComponent: () => import('../settings/settings.component'),
-    canMatch: [authGaurd()]
+    canMatch: [authGuard()]
   },
   {
     path: 'user-profile',
     loadComponent: () => import('../user-profile/user-profile.component'),
-    canMatch: [authGaurd()]
+    canMatch: [authGuard()]
   },
   // This code redirects any path to the root path.
   {
