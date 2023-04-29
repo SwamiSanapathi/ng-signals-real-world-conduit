@@ -28,8 +28,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 # TODO
-- Add Interceptors to fetch User Articles
-- Tags
 - Creating Articles
 - User Profile
 - Settings
+- Typed Forms Impl 
+- Each article full view
+- Tags Filter
+- API Calls Optimization

@@ -18,6 +18,10 @@
         <a href="#" class="text-lg font-bold text-gray-800 hover:text-gray-900">{{item.title}}</a>
         <p class="text-gray-600">{{item.description}}</p>
       </div>
+      <ul class="tag-list flex flex-wrap mt-2" *ngIf="item?.tagList?.length">
+        <li class="tag-default tag-pill tag-outline bg-gray-200 text-gray-700 text-sm font-semibold py-1 px-2 rounded-full mr-2 mb-2" *ngFor="let tag of item?.tagList">{{tag}}</li>
+      </ul>
+      
       <a href="#" class="text-green-500 hover:text-green-600">Read more...</a>
     </article>
 </div>
