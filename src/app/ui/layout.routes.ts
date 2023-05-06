@@ -27,8 +27,9 @@ export default [
     canMatch: [authGuard()]
   },
   {
-    path: 'user-profile',
+    path: 'user-profile/:username',
     loadComponent: () => import('../user-profile/user-profile.component'),
+    resolve: {},
     canMatch: [authGuard()]
   },
   // This code redirects any path to the root path.

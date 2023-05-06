@@ -1,31 +1,34 @@
 <main class="container mx-auto px-8 py-8 text-center">
-    <div class="profile-page w-full">
-        <div class="user-info  bg-gray-300 p-8 rounded-md">
-            <div class="container mx-auto flex flex-wrap ">
-                <div class="w-full">
-                    <img src="https://api.realworld.io/images/smiley-cyrus.jpeg" alt="User Avatar"
-                        class="w-32 h-32 rounded-full mx-auto mb-4">
-                    <h4 class="text-lg font-medium mb-2">{{authService.username()}}</h4>
-                    <a routerLink="/settings"
-                        class="bg-gray-400 hover:bg-gray-500 text-gray-800 font-medium py-2 px-4 rounded-full">
-                        <i class="fas fa-cog"></i> Edit Profile Settings
-                    </a>
+    <ng-container *ngIf="state() === 'completed'; else loadingTemp">
+        <div class="profile-page w-full">
+            <div class="user-info  bg-gray-300 p-8 rounded-md">
+                <div class="container mx-auto flex flex-wrap ">
+                    <div class="w-full">
+                        <img src="{{authService.profileInfo()?.image}}" alt="User Avatar"
+                            class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h4 class="text-lg font-medium mb-2">{{authService.profileInfo()?.username}}</h4>
+                        <a routerLink="/settings"
+                            class="bg-gray-400 hover:bg-gray-500 text-gray-800 font-medium py-2 px-4 rounded-full">
+                            <i class="fas fa-cog"></i> Edit Profile Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-8 py-10 flex flex-wrap">
+                <div class="w-full md:w-9/12 lg:w-8/12">
+                    <ul class="flex justify-center text-gray-700 font-medium">
+                        <li class="mr-6">
+                            <a class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent">My Posts</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="text-gray-600 hover:text-gray-800">Favorited
+                                Posts</a>
+                        </li>
+                    </ul>
+                    <div class="text-center mt-4"> No articles are here... yet. </div>
                 </div>
             </div>
         </div>
-        <div class="container mx-auto px-8 py-10 flex flex-wrap">
-            <div class="w-full md:w-9/12 lg:w-8/12">
-                <ul class="flex justify-center text-gray-700 font-medium">
-                    <li class="mr-6">
-                        <a class="text-gray-600 hover:text-gray-800 border-b-2 border-transparent">My Posts</a>
-                    </li>
-                    <li class="mr-6">
-                        <a class="text-gray-600 hover:text-gray-800">Favorited
-                            Posts</a>
-                    </li>
-                </ul>
-                <div class="text-center mt-4"> No articles are here... yet. </div>
-            </div>
-        </div>
-    </div>
+    </ng-container>
+    <ng-template #loadingTemp>Loading Profile</ng-template>
 </main>

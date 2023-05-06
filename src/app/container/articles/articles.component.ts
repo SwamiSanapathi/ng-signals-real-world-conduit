@@ -1,8 +1,7 @@
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { ArticlesService } from './articles.service';
-import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-articles',
@@ -14,8 +13,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 })
 export default class ArticlesComponent {
     articles: Article[] = [];
-    @Input() set article(art: any) {
+    @Input({ required: true }) set article(art: any) {
         this.articles = art;
     }
-
 }

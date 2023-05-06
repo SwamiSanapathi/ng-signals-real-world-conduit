@@ -20,9 +20,11 @@
                         [routerLinkActiveOptions]="{exact: true}">Settings</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800 flex justify-between" routerLink="/user-profile"
+                    <a class="text-gray-600 hover:text-gray-800 flex justify-between"
+                        [routerLink]="['/user-profile', authService.username()]"
                         routerLinkActive="text-black-500 font-bold" [routerLinkActiveOptions]="{exact: true}">
-                        <img class="w-8 h-8 rounded-full mx-1" src="https://api.realworld.io/images/smiley-cyrus.jpeg" />
+                        <img class="w-8 h-8 rounded-full mx-1"
+                            src="https://api.realworld.io/images/smiley-cyrus.jpeg" />
 
                         {{authService.username()}}
                     </a>
