@@ -4,17 +4,17 @@ import { Router } from '@angular/router';
 import { ApiConfigurations } from '../config/api-config';
 import { httpErrorResponse } from '../models/error';
 import { LoginCredentials, NewUser } from '../models/new-user';
-import { processAuthErrors } from '../utils/process-auth-errors';
 import { UserProfile } from '../models/user-profile';
+import { processAuthErrors } from '../utils/process-auth-errors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     isAuthenticated = signal<boolean>(false);
     user = signal<string | null>(null);
-    username = computed(() => {
-        return this.user() || sessionStorage.getItem('username') || null;
-    });
-    profileInfo = signal<UserProfile | null>(null);
+    readonly username = computed(() => this.user() || this.getUser().username || null);
+
+    profileInfo = signal<UserProfile>({ username: '', image: '', bio: '', following: false, email: '' });
+    readonly readOnlyUserInfo = computed(() => (this.profileInfo().username ? this.profileInfo() : this.getUser()));
 
     readonly #http = inject(HttpClient);
     readonly apiUrl = inject(ApiConfigurations);
@@ -27,10 +27,11 @@ export class AuthService {
                 {
                     console.log(response);
                     const { user } = response;
+                    sessionStorage.setItem('token', user.token);
                     this.isAuthenticated.set(true);
                     this.user.set(user['username']);
-                    sessionStorage.setItem('token', user.token);
-                    sessionStorage.setItem('username', user.username);
+                    sessionStorage.setItem('conduit-user', JSON.stringify(user));
+                    this.profileInfo.set(user);
                     this.#router.navigate(['/']);
                     this.errors.set({});
                 }
@@ -60,5 +61,15 @@ export class AuthService {
 
     getAuthStatus() {
         return this.isAuthenticated.set(this.isAuthenticated() || sessionStorage.getItem('token') !== null);
+    }
+
+    getUser(): UserProfile {
+        const session = sessionStorage.getItem('conduit-user');
+        if (!session) return {} as UserProfile;
+        try {
+            return JSON.parse(session);
+        } catch (error) {
+            return {} as UserProfile;
+        }
     }
 }

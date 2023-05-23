@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserProfile } from '../models/user-profile';
-import { AuthService } from '../services/auth-service';
 import { UserProfileService } from './user-profile.service';
 
 @Component({
@@ -14,10 +13,10 @@ import { UserProfileService } from './user-profile.service';
     providers: [UserProfileService],
 })
 export default class UserProfileComponent implements OnInit, OnDestroy {
-    readonly authService = inject(AuthService);
     readonly #userProfileService = inject(UserProfileService);
     @RouteParamInput() username!: string;
     state = signal<'pending' | 'completed'>('pending');
+    localStore = signal<UserProfile>({} as UserProfile);
     destroy$ = new Subject<void>();
 
     ngOnInit(): void {
@@ -35,9 +34,8 @@ export default class UserProfileComponent implements OnInit, OnDestroy {
             .getUser(this.username)
             .pipe(takeUntil(this.destroy$))
             .subscribe((response: { profile: UserProfile }) => {
-                this.authService.profileInfo.set(response.profile);
+                this.localStore.set(response.profile);
                 this.state.set('completed');
-                console.log(this.authService.profileInfo());
             });
     }
 }

@@ -5,4 +5,5 @@ export interface UserProfile {
     bio: null | string;
     image: string;
     following: boolean;
+    email?: string;
 }
